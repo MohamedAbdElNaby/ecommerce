@@ -3,16 +3,19 @@ import 'dart:ui';
 import 'package:ecommerce_app/src/app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+// import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'nonweb_url_strategy.dart'
+    if (dart.library.html) 'web_url_strategy.dart';
 
 void main() async {
   // * For more info on error handling, see:
   // * https://docs.flutter.dev/testing/errors
   await runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
-    setUrlStrategy(PathUrlStrategy());
+    // setUrlStrategy(PathUrlStrategy());
+    configureUrl();
     GoRouter.optionURLReflectsImperativeAPIs = true;
 
     // * This code will present some error UI if any uncaught exception happens
