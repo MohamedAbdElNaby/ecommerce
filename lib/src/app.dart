@@ -9,6 +9,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: goRouter,
+      builder: (context, widget) {
+        if (widget is Scaffold || widget is Navigator) {}
+        ErrorWidget.builder = (errorDetails) {
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.red,
+              title: Text('An error occurred'.hardcoded),
+            ),
+            body: Center(child: Text(errorDetails.toString())),
+          );
+        };
+        if (widget != null) return widget;
+        throw ('widget is null');
+      },
       debugShowCheckedModeBanner: false,
       restorationScopeId: 'app',
       onGenerateTitle: (BuildContext context) => 'My Shop'.hardcoded,
